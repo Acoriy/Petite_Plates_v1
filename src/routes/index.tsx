@@ -23,8 +23,21 @@ export const Route = createFileRoute("/")({
         property: "og:description",
         content: "Cuisine généreuse, esprit chic. Les recettes signature de Ludo.",
       },
+      // Google AdSense Account Meta Tag 
+      {
+        name: "google-adsense-account",
+        content: "ca-pub-1799331850346217",
+      },
     ],
     links: [{ rel: "canonical", href: "/" }],
+    // Inject the Google AdSense Script securely into the document head
+    scripts: [
+      {
+        src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1799331850346217",
+        async: true,
+        crossOrigin: "anonymous",
+      },
+    ],
   }),
   component: HomePage,
 });
@@ -205,9 +218,8 @@ function RencontreCard() {
 
 /* ============== BENTO CATEGORIES ============== */
 function BentoCategories({ categories }: { categories: Category[] }) {
-  // Bento layout — 5 tuiles asymétriques
   const layouts = [
-    "md:col-span-2 md:row-span-2", // big
+    "md:col-span-2 md:row-span-2",
     "md:col-span-2 md:row-span-1",
     "md:col-span-1 md:row-span-1",
     "md:col-span-1 md:row-span-2",
@@ -248,7 +260,6 @@ function BentoCategories({ categories }: { categories: Category[] }) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--espresso)]/90 via-[var(--espresso)]/20 to-transparent" />
 
-                {/* Glass label */}
                 <div className="absolute inset-x-5 bottom-5 rounded-2xl glass-dark p-4 text-[var(--cream)] transition-transform duration-500 group-hover:-translate-y-1">
                   <div className="flex items-center justify-between gap-3">
                     <div>
@@ -346,7 +357,6 @@ function LatestRecipes({ recipes }: { recipes: Recipe[] }) {
                       )}
                       <div className="absolute inset-0 bg-gradient-to-t from-[var(--espresso)]/55 via-transparent to-transparent" />
 
-                      {/* badges top — flex-wrap pour gérer les textes longs proprement */}
                       <div className="absolute inset-x-3 top-3 flex flex-wrap items-start justify-between gap-2">
                         {r.category ? (
                           <span className="inline-flex max-w-[70%] items-center gap-2 rounded-full border-2 border-[var(--espresso)] bg-[var(--cream)] py-1 pl-1 pr-3 text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--espresso)] shadow-[3px_3px_0_0_var(--espresso)]">
@@ -369,7 +379,6 @@ function LatestRecipes({ recipes }: { recipes: Recipe[] }) {
                         </span>
                       </div>
 
-                      {/* bottom meta — flex-wrap pour ne jamais casser la carte */}
                       <div className="absolute inset-x-3 bottom-3 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 rounded-xl border-2 border-[var(--espresso)] bg-[var(--cream)] px-3 py-2 text-[11px] font-semibold text-[var(--espresso)] shadow-[3px_3px_0_0_var(--espresso)]">
                         <span className="inline-flex items-center gap-1.5">
                           <Clock className="h-3.5 w-3.5 text-[var(--caramel)]" />{" "}
@@ -387,7 +396,6 @@ function LatestRecipes({ recipes }: { recipes: Recipe[] }) {
                       </div>
                     </div>
 
-                    {/* Contenu : flex-col + justify-between => titre+desc en haut, lien aligné en bas */}
                     <div className="flex flex-1 flex-col justify-between gap-4 p-5">
                       <div className="min-w-0">
                         <h3 className="line-clamp-2 font-display text-2xl font-bold leading-tight text-[var(--espresso)] transition-colors group-hover:text-[var(--caramel)]">
