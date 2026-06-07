@@ -45,7 +45,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
         <h1 className="text-2xl font-semibold">Ça a un peu débordé en cuisine…</h1>
         <p className="mt-2 text-sm text-muted-foreground">{error.message}</p>
         <button
-          onClick={() => { router.invalidate(); reset(); }}
+          onClick={() => {
+            router.invalidate();
+            reset();
+          }}
           className="mt-6 inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground"
         >
           Réessayer
@@ -61,11 +64,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Les Petits Plats de Ludo — Recettes gourmandes, stylées et premium" },
-      { name: "description", content: "Les recettes de Ludo, influenceuse cuisine : des plats généreux, drôles et faciles à reproduire chez vous." },
+      {
+        name: "description",
+        content:
+          "Les recettes de Ludo, influenceuse cuisine : des plats généreux, drôles et faciles à reproduire chez vous.",
+      },
       { name: "author", content: "Ludo" },
       { property: "og:site_name", content: "Les Petits Plats de Ludo" },
       { property: "og:title", content: "Les Petits Plats de Ludo" },
-      { property: "og:description", content: "Recettes gourmandes, drôles et accessibles par Ludo." },
+      {
+        property: "og:description",
+        content: "Recettes gourmandes, drôles et accessibles par Ludo.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "theme-color", content: "#85511C" },
@@ -74,7 +84,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Inter:wght@300;400;500;600;700&family=Caveat:wght@500;700&family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Inter:wght@300;400;500;600;700&family=Caveat:wght@500;700&family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap",
+      },
     ],
     scripts: [
       {
@@ -113,7 +126,9 @@ function AuthListener() {
   const router = useRouter();
   const queryClient = useQueryClient();
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(() => {
       router.invalidate();
       queryClient.invalidateQueries();
     });
